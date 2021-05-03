@@ -28,26 +28,26 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
 
 //                p_Anzahl_WBox[DATA->ident]->Index_Wbox = DATA->ident;       // Wbox_Adresse in Index_Wbox speichern für Zustand Anzeige
 
-                if(p_Anzahl_WBox[DATA->ident]->eConnectionState == DISCONNECTED)    // Auto ist angeschlossen,
+                if(Alle_WBox[DATA->ident].eConnectionState == DISCONNECTED)    // Auto ist angeschlossen,
                 {
                     GLOBALS.Anzahl_Connected++;                             // nur inkrementieren, wenn das Auto vorher nicht angeschlossen war
                 }
-                p_Anzahl_WBox[DATA->ident]->eConnectionState = CONNECTED;
+                Alle_WBox[DATA->ident].eConnectionState = CONNECTED;
 
 
                 if(zweites_Byte == 0x01)                                    // Prüfen des zweiten Bytes, Auto ist voll geladen?
                 {
-                  if(p_Anzahl_WBox[DATA->ident]->eChargeState == NOT_FULL)
+                  if(Alle_WBox[DATA->ident].eChargeState == NOT_FULL)
                     {
                       GLOBALS.Anzahl_FullCharged++;                         // nur inkrementieren, wenn das Auto vorher nicht voll geladen war
                     }
-                    p_Anzahl_WBox[DATA->ident]->eChargeState = FULL;
+                    Alle_WBox[DATA->ident].eChargeState = FULL;
 
                     // Übertragung an der Adresse "DATA->ident" abbrechen
                     // (Aufruf der Funktion zum Stoppen des Ladevorgangs)???
                     // (Nichts machen, Auto wird nicht mehr laden)
                 }
-            else if (p_Anzahl_WBox[DATA->ident]->eChargeState == FULL)      // Auto ist nicht voll geladen
+            else if (Alle_WBox[DATA->ident].eChargeState == FULL)      // Auto ist nicht voll geladen
                 {
                     GLOBALS.Anzahl_FullCharged--;   // nur dekrementieren, wenn es voll geladen war
                 }
@@ -59,25 +59,21 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
             {
                 // Kein Auto ist angeschlossen.
                 // Flag zurücksetzen und Array freigeben
-                if(p_Anzahl_WBox[DATA->ident] != (WBox *)NULL)
-                {
-                    if(p_Anzahl_WBox[DATA->ident]->eConnectionState == CONNECTED)
+
+                    if(Alle_WBox[DATA->ident].eConnectionState == CONNECTED)
                     {
                         GLOBALS.Anzahl_Connected--;                 //nur dekrementieren, wenn das Auto angeschlossen war
                     }
-                    if(p_Anzahl_WBox[DATA->ident]->eChargeState == FULL)
+                    if(Alle_WBox[DATA->ident].eChargeState == FULL)
                     {
                         GLOBALS.Anzahl_FullCharged--;               //nur dekrementieren, wenn das Auto voll geladen war
                     }
 
-                  p_Anzahl_WBox[DATA->ident]->eConnectionState = DISCONNECTED;
-                  p_Anzahl_WBox[DATA->ident]->eChargeState = NOT_FULL;
-                  p_Anzahl_WBox[DATA->ident] = NULL;
-
-                }
+                  Alle_WBox[DATA->ident].eConnectionState = DISCONNECTED;
+                  Alle_WBox[DATA->ident].eChargeState = NOT_FULL;
             }
 
-            p_Anzahl_WBox[DATA->ident]->Index_Wbox = DATA->ident;   // Wbox_Adresse in Index_Wbox speichern für Zustand Anzeige
+            Alle_WBox[DATA->ident].Index_Wbox = DATA->ident;   // Wbox_Adresse in Index_Wbox speichern für Zustand Anzeige
             start_Übertragung_Stromsollwert();                      // Übertragung an der Adresse "DATA->ident" starten
             Anzeige_Wbox_Zustand(&Alle_WBox[DATA->ident]);
 
