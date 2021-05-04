@@ -1,0 +1,4 @@
+Dependencies for Project 'Tessy_keil', Target 'Tessy_Simulator': (DO NOT MODIFY !)
+F (.\startup_stm32f4xx.s)(0x4F855D74)(--cpu Cortex-M4.fp -g --apcs=interwork -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\ST\STM32F4xx --list "startup_stm32f4xx.lst" --xref -o "C:\tessy\testarea\startup_stm32f4xx.o" --depend "C:\tessy\testarea\startup_stm32f4xx.d")
+F (.\system_stm32f4xx.c)(0x504F6A8A)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\ST\STM32F4xx -o "C:\tessy\testarea\system_stm32f4xx.o" --omf_browse "C:\tessy\testarea\system_stm32f4xx.crf" --depend "C:\tessy\testarea\system_stm32f4xx.d")
+F (.\main.c)(0x609009FC)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\ST\STM32F4xx -o "C:\tessy\testarea\main.o" --omf_browse "C:\tessy\testarea\main.crf" --depend "C:\tessy\testarea\main.d")
