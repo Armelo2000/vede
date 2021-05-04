@@ -348,9 +348,9 @@
             <uSurpInc>0</uSurpInc>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>SIMULATION</Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -410,6 +410,16 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>process_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\process_can.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -819,6 +829,16 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>process_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\process_can.c</FilePath>
             </File>
           </Files>
         </Group>

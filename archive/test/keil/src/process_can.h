@@ -11,7 +11,7 @@
 #include "stdint.h"
 // #include <LMV1_app_definitions.h>
 
-#define MAX_WBOX_ANZAHL      16             // Maximale Anzahl der Wbox
+#define MAX_WBOX_ANZAHL      5             // Maximale Anzahl der Wbox
 
 typedef enum Plug_In_State
 {
@@ -25,7 +25,7 @@ typedef enum Charge_State
   FULL              /* Auto ist voll geladen */
 }eCharge_State;
 
-#ifdef DUMMY
+#ifdef SIMULATION
 
 #define NULL	((void *)0)
 #define true	1
@@ -57,7 +57,7 @@ typedef struct WBox
     eCharge_State  eChargeState;            /* Zustand Auto voll geladen oder nicht */
     uint8_t Index_Wbox;
     bool Vorhanden;
-	  char lcdmsg;
+	  char lcdmsg;														/* character to display to LCD (D=Disconnect, F=Full, L=Load) */ 
 
 }WBox;
 

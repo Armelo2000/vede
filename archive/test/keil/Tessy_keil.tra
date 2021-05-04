@@ -14,7 +14,7 @@
 ### ADS-LD Output File: 'Tessy_keil.axf'
 ### ADS-LD Command File: 'Tessy_keil.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile 'Tessy_keil.lnp', Handle=0x00000824
+### Creating CmdFile 'Tessy_keil.lnp', Handle=0x00000700
 ### Writing '.lnp' file
 ### ADS-LD Command file 'Tessy_keil.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

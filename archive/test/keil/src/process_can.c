@@ -9,7 +9,7 @@
 
 //WBox *p_Anzahl_WBox[MAX_WBOX_ANZAHL] = {(WBox *)NULL};
 WBox Alle_WBox[MAX_WBOX_ANZAHL];
-#ifdef DUMMY
+#ifdef SIMULATION
 mboxdata tCanData;
 mboxdata * DATA = &tCanData;
 #endif
@@ -59,7 +59,7 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
     {
         if((DATA->ident >= 0x00000000) && (DATA->ident <= 0x0000000F))      // prüfen, ob die Adresse eine gültige Wbox-Adresse ist
         {
-#ifdef DUMMY
+#ifdef SIMULATION
 						 uint8_t erstes_Byte = (DATA->receive >> 8) & 0x01;
 						 uint8_t zweites_Byte = DATA->receive & 0x01;
 #else
@@ -112,7 +112,14 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
                 {
 									 Alle_WBox[DATA->ident].eConnectionState = DISCONNECTED;
                    GLOBALS.Anzahl_Connected--;                 //nur dekrementieren, wenn das Auto angeschlossen war
+									 
+									 // wenn das auto verbunden und voll war dann die anzahl von volle Auto reduzieren
+									 if(Alle_WBox[DATA->ident].eChargeState == FULL)
+									 {
+									   GLOBALS.Anzahl_FullCharged--;
+									 }
                 }
+								/*
                 if(zweites_Byte == 0x01)                                    // Prüfen des zweiten Bytes, Auto ist voll geladen?
                 {
 									// Full !
@@ -134,7 +141,7 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
 											Alle_WBox[DATA->ident].eChargeState = NOT_FULL;
 											GLOBALS.Anzahl_FullCharged--;   // nur dekrementieren, wenn es voll geladen war
 										}
-								}
+								}  */
                 Alle_WBox[DATA->ident].lcdmsg = 'D';
 
             }
@@ -172,11 +179,15 @@ void Anzeige_Wbox_Zustand(WBox *Zustand)//Alle_WBox[DATA->ident]
 {
     if(Zustand != NULL)
     {
-        uint8_t lcd_Spalte = Zustand->Index_Wbox + 1;       // Index mit der Wbox_adresse in lcd_Spalte speichern
+        uint8_t lcd_Spalte = (Zustand->Index_Wbox * 2) + 1;       // Index mit der Wbox_adresse in lcd_Spalte speichern
         GLOBALS.lcd_fehler_exist = false;               // Flag zurücksetzten
 
-        if(lcd_Spalte < 3)                              // Für 3 Wboxen
+        if(Zustand->Index_Wbox < 3)                              // Für 3 Wboxen
         {
+#ifndef SIMULATION					
+					 hd44780_write_string(Zustand->lcdmsg,4,lcd_Spalte,NO_CR_LF); 
+#endif
+					/*
             if (Zustand->eConnectionState == DISCONNECTED)                  // Auto ist nicht angesteckt?
             {
                 //hd44780_write_string("D",4,lcd_Spalte,NO_CR_LF);          // Für die jeweilige Wbox "D" auf dem Display schreiben
@@ -192,6 +203,7 @@ void Anzeige_Wbox_Zustand(WBox *Zustand)//Alle_WBox[DATA->ident]
                    // hd44780_write_string("L",4,lcd_Spalte,NO_CR_LF);      // Für die jeweilige Wbox "F" auf dem Display schreiben
                 }
             }
+					*/
 
         }
     }
