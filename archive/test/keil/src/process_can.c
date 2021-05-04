@@ -119,29 +119,7 @@ void Verarbeitung_CAN_msg(mboxdata *DATA)                                   // V
 									   GLOBALS.Anzahl_FullCharged--;
 									 }
                 }
-								/*
-                if(zweites_Byte == 0x01)                                    // Prüfen des zweiten Bytes, Auto ist voll geladen?
-                {
-									// Full !
-                  if(Alle_WBox[DATA->ident].eChargeState == NOT_FULL)
-                    {
-											Alle_WBox[DATA->ident].eChargeState = FULL;
-                      GLOBALS.Anzahl_FullCharged++;                         // nur inkrementieren, wenn das Auto vorher nicht voll geladen war
-                    } 
 
-                    // Übertragung an der Adresse "DATA->ident" abbrechen
-                    // (Aufruf der Funktion zum Stoppen des Ladevorgangs)???
-                    // (Nichts machen, Auto wird nicht mehr laden)
-                }
-								else
-								{
-									  // Not Full !
-										if (Alle_WBox[DATA->ident].eChargeState == FULL)      // Auto ist nicht voll geladen
-										{
-											Alle_WBox[DATA->ident].eChargeState = NOT_FULL;
-											GLOBALS.Anzahl_FullCharged--;   // nur dekrementieren, wenn es voll geladen war
-										}
-								}  */
                 Alle_WBox[DATA->ident].lcdmsg = 'D';
 
             }
